@@ -1,5 +1,5 @@
 body {
-  max-width: 60%;
+  max-width: 50%;
   margin: 0 auto;
 }
 
@@ -25,8 +25,8 @@ h1 {
 
 .gender__list {
   display: flex;
+  gap: 20px;
   flex-wrap: wrap;
-  justify-content: space-around;
 }
 
 .gender__title, .albums__title, .title__card {
@@ -42,8 +42,8 @@ h1 {
 }
 
 button, .button__gender {
-  width: 64px;
-  height: 32px;
+  min-width: 64px;
+  height: 38px;
   border-radius: var(--radius-1);
   border: 1px;
   padding: 0px, 8px, 0px, 8px;
@@ -52,6 +52,7 @@ button, .button__gender {
   font-size: var(--font-3);
   font-weight: 500;
   font-family: "Inter", sans-serif;
+  color: var(--color-grey-2);
 
   background-color: var(--color-grey-8);
 }
@@ -100,7 +101,7 @@ button, .button__gender {
 .albums__card{
     position: relative;
     list-style: none;
-    width: 395px;
+    width: 308px;
     height: 259px;
     border-radius: var(--radius-1);
     overflow: hidden;
@@ -126,6 +127,7 @@ button, .button__gender {
     font-size: var(--font-4);
     font-weight: 500;
     line-height: 0.908rem;
+    color: var(--color-grey-2);
 }
 
 .button__card{
@@ -140,6 +142,13 @@ button, .button__gender {
     background-color: var(--color-grey-7);
 }
 
+.button__card:hover, .button__gender:hover, .mode__controller:hover{
+    background-color: var(--color-grey-1);
+    color: var(--color-grey-9);
+    cursor: pointer;
+}
+
 .title__card{
     margin: 0 0 30px 20px;
 }
+

@@ -1,4 +1,5 @@
 import { products, categories } from "./productsData.js";
+import { changeTheme } from "./theme.js";
 
 const createCard = (product) => {
   const card = document.createElement("li");
@@ -54,43 +55,59 @@ const renderCard = (array) => {
   });
 };
 
+
 const filterElements = (products, categories) => {
   const buttonGender = document.querySelectorAll(".button__gender");
+  const inputRange = document.querySelector(".input__container");
+  const price = document.querySelector(".paragraph__container");
+
+  let filteredArray = products;
+  let categoryIndex = 0;
+  let inputValue = Number(inputRange.value);
 
   buttonGender.forEach((button) => {
     button.addEventListener("click", () => {
       const categoryText = button.innerText;
 
-      const categoryFound = categories.findIndex(
+      categoryIndex = categories.findIndex(
         (category) => category === categoryText
+
       );
 
-      if (categoryFound !== -1) {
-        const categoryFiltered = products.filter(
-          (product) => product.category === categoryFound
+      if (categoryIndex === 0) {
+        filteredArray = products.filter(
+          (product) => product.price <= Number(inputValue)
+        );
+      } else if (categoryIndex !== -1) {
+        filteredArray = products.filter(
+          (product) => product.category === categoryIndex && product.price <= Number(inputValue)
         );
 
-        renderCard(categoryFiltered);
-      } else if (categoryFound === 0) {
-        renderCard(products);
       }
+      renderCard(filteredArray);
     });
   });
 
-  const inputRange = document.querySelector(".input__container");
-  const price = document.querySelector(".paragraph__container");
-
   inputRange.addEventListener("input", () => {
-    price.innerText = `Até R$ ${inputRange.value}`;
+    inputValue = inputRange.value;
+    price.innerText = `Até R$ ${inputValue}`;
 
-    const arrayFiltered = products.filter(
-      (element) => element.price <= Number(inputRange.value)
-    );
+    if (categoryIndex === 0) {
+      filteredArray = products.filter(
+        (product) => product.price <= Number(inputValue)
+      );
+    } else if (categoryIndex !== -1) {
+      filteredArray = products.filter(
+        (product) => product.category === categoryIndex && product.price <= Number(inputValue)
+      );
 
-    renderCard(arrayFiltered);
+    }
+    renderCard(filteredArray);
   });
 };
 
 renderCard(products);
 renderButtons(categories);
 filterElements(products, categories);
+changeTheme();
+
